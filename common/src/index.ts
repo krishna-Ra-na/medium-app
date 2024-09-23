@@ -12,7 +12,7 @@ export const signinInput = z.object({
   email: z.string().email(),
   password: z.string(),
 });
-
+// hello
 export type SigninType = z.infer<typeof signinInput>;
 
 export const createPostInput = z.object({
