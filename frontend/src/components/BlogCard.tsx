@@ -17,16 +17,16 @@ export const BlogCard = ({
 }: BlogCardProps) => {
     return (<>
         <Link to={`/blog/${id}`}>
-            <article>
+            <article className="max-w-screen-lg hover:bg-[#f2f2f24e]">
                 <div className="p-4 flex max-h-[450px]">
                     <div className="flex flex-col gap-3">
                         <div className="flex items-center gap-4">
-                            <Avatar size={5} name={authorName} />
+                            <Avatar size={8} name={authorName} />
                             {authorName} . {publishedDate}
                         </div>
                         <div className=" ">
-                            <h5 className="mb-2 text-2xl font-bold tracking-tight text-[#242424] dark:text-white">  {title}</h5>
-                            <p className="font-normal text-gray-700 dark:text-gray-400">{content.slice(0, 100) + "..."}</p>
+                            <h5 className="mb-2 text-2xl font-bold tracking-tight text-[#242424] dark:text-white">  {title.length > 100 ? title.slice(0, 100) + "..." : title}</h5>
+                            <p className="font-normal text-gray-700 dark:text-gray-400">{content.length > 100 ? content.slice(0, 100) + "..." : content}</p>
                         </div>
 
                         <div>
@@ -58,7 +58,7 @@ export function Avatar({ name, size = 5 }: { name: string, size?: number }) {
     )
 }
 export function Circle() {
-    return <div className="h-1 w-1 rounded-full bg-slate-500">
+    return <div className="h-8 w-8 rounded-full bg-slate-500">
 
     </div>
 }
