@@ -5,7 +5,7 @@ interface BlogCardProps {
     title: string;
     content: string;
     publishedDate: string
-    id: number
+    id: string
 }
 
 export const BlogCard = ({
@@ -56,4 +56,9 @@ export function Avatar({ name, size = 5 }: { name: string, size?: number }) {
             <span className="font-medium text-gray-600 dark:text-gray-300">{name[0]}</span>
         </div>
     )
+}
+export function Circle() {
+    return <div className="h-1 w-1 rounded-full bg-slate-500">
+
+    </div>
 }
