@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import { ContentBlock, Editor, EditorState, RawDraftContentState, RichUtils, convertToRaw } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 
-const DraftEditor: React.FC<{ onChange: (description: RawDraftContentState) => void }> = ({ onChange }) => {
+const DraftEditor: React.FC<{ onChange: (description: string) => void }> = ({ onChange }) => {
     const [editorState, setEditorState] = useState(EditorState.createEmpty());
     const editor = useRef<Editor>(null);
 
@@ -16,7 +16,10 @@ const DraftEditor: React.FC<{ onChange: (description: RawDraftContentState) => v
     const handleEditorChange = (newEditorState: EditorState) => {
         setEditorState(newEditorState);
         const rawContent: RawDraftContentState = convertToRaw(newEditorState.getCurrentContent());
-        onChange(rawContent);
+        const rawContentString = JSON.stringify(rawContent); // Serialize the object to a string
+
+        // Pass the string to onChange
+        onChange(rawContentString);
     };
 
     // const handleKeyCommand = (command: EditorCommand, editorState: EditorState): boolean  => {

@@ -38,13 +38,40 @@ export const Blogs = () => {
                     <div className="lg:min-w-[728px] lg:max-w-[728px]">
 
                         {blogs.map((blog, index) => {
+                            const isValidJSON = (string: string) => {
+                                try {
+                                    JSON.parse(string);
+                                    return true;
+                                } catch (e) {
+                                    return false;
+                                }
+                            };
+
+                            let displayContent = blog.content; // Default to blog.content
+
+                            interface Block {
+                                key: string;
+                                text: string;
+                                type: string;
+                                depth: number;
+                                inlineStyleRanges: Array<{ offset: number; length: number; style: string }>;
+                                entityRanges: Array<{ offset: number; length: number; key: number }>;
+                                data: Record<string, any>;
+                            }
+
+                            // Assuming rawContent has been parsed from JSON
+                            if (isValidJSON(blog.content)) {
+                                const rawContent = JSON.parse(blog.content);
+                                // Ensure rawContent.blocks is of type Block[]
+                                displayContent = (rawContent.blocks as Block[]).map((block) => block.text).join('\n');
+                            }
                             return (
                                 <BlogCard
                                     key={index}
                                     id={blog.id}
                                     authorName={blog.author.name || "Anonymous"}
                                     title={blog.title}
-                                    content={blog.content}
+                                    content={displayContent}
                                     publishedDate={"24 sep 2024"}
                                 />
                             )

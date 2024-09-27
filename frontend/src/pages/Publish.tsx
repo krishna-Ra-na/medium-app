@@ -8,10 +8,10 @@ import { RawDraftContentState } from "draft-js";
 
 export const Publish = () => {
     const [title, setTitle] = useState("");
-    const [description, setDescription] = useState<RawDraftContentState>();
+    const [description, setDescription] = useState<string>();
     const navigate = useNavigate();
 
-    const handleDescriptionChange = (newDescription: RawDraftContentState) => {
+    const handleDescriptionChange = (newDescription: string) => {
         setDescription(newDescription);
     };
 
@@ -28,7 +28,7 @@ export const Publish = () => {
                     setDescription(e.target.value)
                 }} /> */}
                 <button onClick={async () => {
-                    console.log("des", description);
+                    // console.log("des", description);
                     const jwt = localStorage.getItem("token");
                     const response = await axios.post(`${BACKEND_URL}/api/v1/blog`, {
                         title,
