@@ -24,7 +24,7 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
                     <div className="text-slate-500 pt-2">
                         Post on 2nd December 2023
                     </div>
-                    <div className="pt-4">
+                    <div className="pt-4 blog-content">
                         {/* {blog.content} */}
                         <div dangerouslySetInnerHTML={{ __html: cleanHtmlContent }} />
                         {/* <Editor editorState={editorState} readOnly={true} onChange={() => { }} /> */}

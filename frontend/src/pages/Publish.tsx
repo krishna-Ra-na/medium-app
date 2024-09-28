@@ -4,8 +4,6 @@ import { BACKEND_URL } from "../config";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import DraftEditor from "../components/DraftEditor";
-import { RawDraftContentState } from "draft-js";
-
 export const Publish = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState<string>();
