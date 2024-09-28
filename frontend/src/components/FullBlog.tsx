@@ -7,11 +7,23 @@ import DOMPurify from 'dompurify';
 
 export const FullBlog = ({ blog }: { blog: Blog }) => {
     // Convert the blog content from the raw JSON to EditorState
-    const rawContent = JSON.parse(blog.content); // Ensure it's in the right format
-    const contentState = convertFromRaw(rawContent);
-    const editorState = EditorState.createWithContent(contentState);
-    const htmlContent = draftToHtml(rawContent);
-    const cleanHtmlContent = DOMPurify.sanitize(htmlContent);
+    const isValidJSON = (string: string) => {
+        try {
+            JSON.parse(string);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    };
+    let displayContent = blog.content;
+    if (isValidJSON(blog.content)) {
+        const rawContent = JSON.parse(blog.content); // Ensure it's in the right format
+        // const contentState = convertFromRaw(rawContent);
+        // const editorState = EditorState.createWithContent(contentState);
+        const htmlContent = draftToHtml(rawContent);
+        displayContent = DOMPurify.sanitize(htmlContent);
+    }
+
 
     return <div>
         <Appbar />
@@ -25,9 +37,7 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
                         Post on 2nd December 2023
                     </div>
                     <div className="pt-4 blog-content">
-                        {/* {blog.content} */}
-                        <div dangerouslySetInnerHTML={{ __html: cleanHtmlContent }} />
-                        {/* <Editor editorState={editorState} readOnly={true} onChange={() => { }} /> */}
+                        <div dangerouslySetInnerHTML={{ __html: displayContent }} />
                     </div>
                 </div>
                 <div className="col-span-4 px-6 border-l border-[#f2f2f2] min-h-screen">
